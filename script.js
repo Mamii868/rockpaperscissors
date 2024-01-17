@@ -14,11 +14,8 @@ function getComputerChoice() {
   return computerSelection;
 }
 
-getComputerChoice();
-//Remove
-console.log(computerSelection);
-
 function getPlayerChoice() {
+    getComputerChoice();
   playerSelection = prompt("Rock, Paper, or Scissors?");
   console.log(playerSelection);
   round(playerSelection, computerSelection);
@@ -35,8 +32,8 @@ function round(playerSelection, computerSelection) {
     alert("You Lose! Try again.");
     getPlayerChoice();
   } else if (
-    playerSelection != "rock" ||
-    playerSelection != "paper" ||
+    playerSelection != "rock" &&
+    playerSelection != "paper" &&
     playerSelection != "scissors"
   ) {
     alert("Please enter the right item!");
