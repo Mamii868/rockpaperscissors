@@ -1,5 +1,6 @@
 let playerSelection;
 let computerSelection;
+const button = document.querySelectorAll("button")
 function getComputerChoice() {
   computerSelection = Math.floor(Math.random() * 3) + 1;
   if (computerSelection === 1) {
@@ -12,10 +13,11 @@ function getComputerChoice() {
   return computerSelection;
 }
 
-function getPlayerChoice() {
-  playerSelection = prompt("Rock, Paper, or Scissors?");
-  round(playerSelection, computerSelection);
-}
+button.forEach((btn) => btn.addEventListener("click", () => {
+  getComputerChoice();
+  round(btn.value, computerSelection)
+}))
+
 function round(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase();
   if (playerSelection === computerSelection) {
@@ -38,9 +40,4 @@ function round(playerSelection, computerSelection) {
     alert("You Win!");
     getComputerChoice();
   }
-}
-
-for (let i = 0; i < 5; i++) {
-    getPlayerChoice();
-    console.log(`round ${i + 1} completed`)
 }
