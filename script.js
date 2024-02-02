@@ -1,6 +1,6 @@
 let playerSelection;
 let computerSelection;
-const button = document.querySelectorAll("button")
+const button = document.querySelectorAll("button");
 function getComputerChoice() {
   computerSelection = Math.floor(Math.random() * 3) + 1;
   if (computerSelection === 1) {
@@ -13,10 +13,12 @@ function getComputerChoice() {
   return computerSelection;
 }
 
-button.forEach((btn) => btn.addEventListener("click", () => {
-  getComputerChoice();
-  round(btn.value, computerSelection)
-}))
+button.forEach((btn) =>
+  btn.addEventListener("click", () => {
+    getComputerChoice();
+    round(btn.value, computerSelection);
+  })
+);
 
 function round(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase();
@@ -25,7 +27,8 @@ function round(playerSelection, computerSelection) {
     getComputerChoice();
   } else if (
     (playerSelection === "rock" && computerSelection == "paper") ||
-    (playerSelection == "paper" && computerSelection == "scissors")
+    (playerSelection == "paper" && computerSelection == "scissors") ||
+    (playerSelection == "scissors" && computerSelection == "rock")
   ) {
     alert("You Lose! Try again.");
     getComputerChoice();
