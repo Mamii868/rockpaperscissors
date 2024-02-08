@@ -7,6 +7,7 @@ const resultsContainer = document.querySelector(".results");
 const messageBox = document.querySelector(".message");
 const finalBox = document.querySelector(".final");
 const restart = document.querySelector(".restart");
+const scoreBox = document.querySelector(".score");
 
 //Logic for computer opponent
 function getComputerChoice() {
@@ -20,6 +21,24 @@ function getComputerChoice() {
   }
   return computerSelection;
 }
+
+//Display Score
+function updateScore() {
+  scoreBox.innerHTML = `You: ${playerScore}  Computer: ${computerScore}`;
+
+  if (playerScore === 5) {
+    button.forEach((btn) => {btn.disabled = true})
+    finalBox.innerHTML = "You Win! Press the button to play again!";
+    restart.removeAttribute("hidden");
+    return;
+  } else if (computerScore === 5) {
+    button.forEach((btn) => {btn.disabled = true})
+    finalBox.innerHTML = "You Lose! Press the button to play again!";
+    restart.removeAttribute("hidden");
+    return
+  }
+}
+updateScore()
 
 //Selection button listener
 button.forEach((btn) =>
@@ -43,6 +62,7 @@ function round(playerSelection, computerSelection) {
     messageBox.innerHTML = "Computer Won. Try Again!";
     computerScore++;
     getComputerChoice();
+    updateScore()
   } else if (
     playerSelection != "rock" &&
     playerSelection != "paper" &&
@@ -53,14 +73,11 @@ function round(playerSelection, computerSelection) {
     messageBox.innerHTML = "You won the round! Keep going!";
     playerScore++;
     getComputerChoice();
+    updateScore()
   }
 }
 
-if (playerScore === 5) {
-  finalBox.innerHTML = "You Win! Press the button to play again!";
-} else if (computerScore === 5) {
-  finalBox.innerHTML = "You Lose! Press the button to play again!";
-}
+
 
 restart.addEventListener("click", () => {
   location.reload();
