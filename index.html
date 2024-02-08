@@ -8,15 +8,18 @@
 <body>
     <h1>Rock, Paper, Scissors</h1>
     <div class="container">
-        <h2>Choose your fighter!</h2>
+        <h2>Best to 5 Wins</h2>
         <div class="btnContainer">
-            <button class="rock" value="rock">Rock</button>
-            <button class="paper" value="paper">Paper</button>
-            <button class="scissors" value="scissors">Scissors</button>
+            <button class="choice rock" value="rock">Rock</button>
+            <button class="choice paper" value="paper">Paper</button>
+            <button class="choice scissors" value="scissors">Scissors</button>
         </div>
         <div class="results">
             <h2>Results</h2>
+            <h3 class="score"></h3>
             <p style="color: red;" class="message"></p>
+            <h2 class="final"></h2>
+            <button hidden class="restart">Restart</button>
         </div>
     </div>
 </body>
