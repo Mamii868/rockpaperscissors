@@ -1,6 +1,12 @@
 let playerSelection;
 let computerSelection;
+let computerScore = 0;
+let playerScore = 0;
 const button = document.querySelectorAll("button");
+const resultsContainer = document.querySelector(".results");
+const messageBox = document.querySelector(".message");
+
+//Logic for computer opponent
 function getComputerChoice() {
   computerSelection = Math.floor(Math.random() * 3) + 1;
   if (computerSelection === 1) {
@@ -13,6 +19,7 @@ function getComputerChoice() {
   return computerSelection;
 }
 
+//Selection button listener
 button.forEach((btn) =>
   btn.addEventListener("click", () => {
     getComputerChoice();
@@ -20,27 +27,36 @@ button.forEach((btn) =>
   })
 );
 
+//Logic to calculate winner
 function round(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase();
   if (playerSelection === computerSelection) {
-    alert("it's a tie! Try again!");
+    messageBox.innerHTML = "It's a tie! Run it back."
     getComputerChoice();
   } else if (
     (playerSelection === "rock" && computerSelection == "paper") ||
     (playerSelection == "paper" && computerSelection == "scissors") ||
     (playerSelection == "scissors" && computerSelection == "rock")
   ) {
-    alert("You Lose! Try again.");
+    messageBox.innerHTML = "Computer Won. Try Again!"
+    computerScore++;
     getComputerChoice();
   } else if (
     playerSelection != "rock" &&
     playerSelection != "paper" &&
     playerSelection != "scissors"
   ) {
-    alert("Please enter the right item!");
-    getPlayerChoice();
+    messageBox.innerHTML = "You should never see this error"
   } else {
-    alert("You Win!");
+    messageBox.innerHTML = "You won the round! Keep going!"
+    playerScore++
     getComputerChoice();
   }
+}
+
+if (playerScore === 5) {
+  alert("You Win! Press OK to try again!")
+  location.reload()
+} else if (computerScore === 5) {
+  alert("You Lose! Press OK to try again!")
 }
