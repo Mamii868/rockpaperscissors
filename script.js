@@ -8,6 +8,8 @@ const messageBox = document.querySelector(".message");
 const finalBox = document.querySelector(".final");
 const restart = document.querySelector(".restart");
 const scoreBox = document.querySelector(".score");
+const pScore = document.querySelector(".pScore");
+const cScore = document.querySelector(".cScore");
 
 //Logic for computer opponent
 function getComputerChoice() {
@@ -24,21 +26,25 @@ function getComputerChoice() {
 
 //Display Score
 function updateScore() {
-  scoreBox.innerHTML = `You: ${playerScore}  Computer: ${computerScore}`;
-
+  pScore.innerHTML = `${playerScore}`
+  cScore.innerHTML = `${computerScore}`
   if (playerScore === 5) {
-    button.forEach((btn) => {btn.disabled = true})
+    button.forEach((btn) => {
+      btn.disabled = true;
+    });
     finalBox.innerHTML = "You Win! Press the button to play again!";
     restart.removeAttribute("hidden");
     return;
   } else if (computerScore === 5) {
-    button.forEach((btn) => {btn.disabled = true})
+    button.forEach((btn) => {
+      btn.disabled = true;
+    });
     finalBox.innerHTML = "You Lose! Press the button to play again!";
     restart.removeAttribute("hidden");
-    return
+    return;
   }
 }
-updateScore()
+updateScore();
 
 //Selection button listener
 button.forEach((btn) =>
@@ -61,8 +67,9 @@ function round(playerSelection, computerSelection) {
   ) {
     messageBox.innerHTML = "Computer Won. Try Again!";
     computerScore++;
+    countAnimation(cScore);
     getComputerChoice();
-    updateScore()
+    updateScore();
   } else if (
     playerSelection != "rock" &&
     playerSelection != "paper" &&
@@ -72,11 +79,16 @@ function round(playerSelection, computerSelection) {
   } else {
     messageBox.innerHTML = "You won the round! Keep going!";
     playerScore++;
+    countAnimation(pScore);
     getComputerChoice();
-    updateScore()
+    updateScore();
   }
 }
 
+function countAnimation(roundWinner) {
+roundWinner.classList.add("countUp")
+setTimeout(() => {roundWinner.classList.remove("countUp")}, 360)
+}
 
 
 restart.addEventListener("click", () => {
